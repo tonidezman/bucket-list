@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class=" all-buckets-and-btn">
-    <span>All Buckets (2)</span>
+    <span>All Buckets ({{ bucketCount }})</span>
     <span>
       <button class="btn-dark">Create new Bucket</button>
     </span>
@@ -15,9 +15,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Mark</td>
-          <td>Otto</td>
+        <tr *ngFor="let bucket of buckets">
+          <td>{{ bucket.name }}</td>
+          <td>{{ bucket.location.name }}</td>
         </tr>
       </tbody>
     </table>
