@@ -1,0 +1,10 @@
+.wrapper {
+  background-color: white;
+  padding: 20px;
+}
+
+.all-buckets-and-btn {
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+}
