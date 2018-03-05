@@ -1,0 +1,9 @@
+h3 {
+  background-color: #333;
+  color: lightblue;
+  padding: 10px 30px;
+}
+.container {
+  width: 800px;
+  margin: 0 auto;
+}

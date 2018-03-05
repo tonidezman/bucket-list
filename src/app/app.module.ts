@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { BucketListComponent } from './bucket/bucket-list/bucket-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BucketListComponent
   ],
   imports: [
     BrowserModule
