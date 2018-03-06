@@ -11,8 +11,17 @@ import { Location } from './../location.model';
 export class NewBucketComponent implements OnInit {
   constructor(private bucketService: BucketService) {}
   locations: Location[] = [];
+  locationObserver;
 
   ngOnInit() {
-    this.locations = this.bucketService.getLocations();
+    this.bucketService.getLocations();
+    this.locations = this.bucketService.locations;
+    this.locationObserver = this.bucketService.changedLocation.subscribe(() => {
+      this.locations = this.bucketService.locations;
+    });
+  }
+
+  onSubmit(data: { 'bucket-name': string; 'bucket-location': string }) {
+    this.bucketService.saveBucket(data);
   }
 }

@@ -17,11 +17,13 @@ export class AllBucketsComponent implements OnInit {
   constructor(public bucketService: BucketService, private router: Router) {}
 
   ngOnInit() {
-    this.buckets = this.bucketService.getBuckets();
-    this.bucketCount = this.buckets.length;
-
     if (this.router.url === '/buckets/new') {
       this.showCreateBucketBtn = false;
     }
+
+    this.bucketService.changedBucket.subscribe(() => {
+      this.buckets = this.bucketService.buckets;
+    });
+    this.bucketService.getBuckets();
   }
 }

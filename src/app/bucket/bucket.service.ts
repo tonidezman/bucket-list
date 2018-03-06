@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import * as _ from 'lodash';
 
 import { Bucket } from './bucket.model';
 import { Location } from './location.model';
@@ -7,52 +10,81 @@ import { AuthorizationService } from './../authorization.service';
 
 @Injectable()
 export class BucketService {
+  public buckets: Bucket[] = [];
+  public locations: Location[] = [];
+  public changedLocation = new Subject();
+  public changedBucket = new Subject();
   private host = 'https://challenge.3fs.si';
-  private buckets: Bucket[] = [];
-  private locations: Location[] = [];
 
   constructor(
     private httpClient: HttpClient,
     private authorizationService: AuthorizationService
   ) {}
 
-  getBuckets(): Bucket[] {
+  getBuckets() {
     this.httpClient
       .get(`${this.host}/storage/buckets`, {
         headers: {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
-      .subscribe(response => {
-        console.log(response);
-      });
-
-    return [];
-
-    // return (this.buckets = [
-    //   {
-    //     id: 'my-awesome-bucket',
-    //     name: 'my-awesome-bucket',
-    //     location: {
-    //       id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
-    //       name: 'Kranj'
-    //     }
-    //   },
-    //   {
-    //     id: 'my-other-bucket',
-    //     name: 'my-other-bucket',
-    //     location: {
-    //       id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
-    //       name: 'Kranj'
-    //     }
-    //   }
-    // ]);
+      .subscribe(
+        (response: { buckets: Bucket[] }) => {
+          this.buckets = response.buckets;
+          this.changedBucket.next();
+        },
+        error => {
+          // TODO notify user if server responds with an error
+        }
+      );
   }
 
-  getLocations(): Location[] {
-    return [
-      { id: 'some-id', name: 'Kranj' },
-      { id: 'some-id', name: 'Ljubljana' }
-    ];
+  getLocations() {
+    this.httpClient
+      .get(`${this.host}/storage/locations`, {
+        headers: {
+          Authorization: `Token ${this.authorizationService.getToken()}`
+        }
+      })
+      .subscribe((response: { locations: Location[] }) => {
+        this.locations = response.locations;
+        this.changedLocation.next();
+      });
+  }
+
+  saveBucket(data: { 'bucket-name': string; 'bucket-location': string }) {
+    const location = _.find(
+      this.locations,
+      (obj: Location) => obj.name === data['bucket-location']
+    );
+
+    const newBucket = new Bucket(
+      _.uniqueId(data['bucket-name']),
+      data['bucket-name'],
+      location
+    );
+
+    this.createBucket(newBucket);
+  }
+
+  createBucket(bucket) {
+    // TODO remove this line when Server api is synchronized with Swagger documentation
+    bucket.location = bucket.location.id;
+
+    return this.httpClient
+      .post(`${this.host}/storage/buckets`, bucket, {
+        headers: {
+          Authorization: `Token ${this.authorizationService.getToken()}`
+        }
+      })
+      .subscribe(
+        response => {
+          this.getBuckets();
+          this.changedBucket.next();
+        },
+        error => {
+          // TODO notify user if server responds with an error
+        }
+      );
   }
 }
