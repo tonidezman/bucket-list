@@ -7,4 +7,9 @@
   display: flex;
   justify-content: space-between;
   height: 44px;
+
+}
+
+.all-buckets-and-btn a {
+  margin-top: -7px;
 }

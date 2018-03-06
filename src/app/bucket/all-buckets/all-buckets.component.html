@@ -2,7 +2,11 @@
   <div class=" all-buckets-and-btn">
     <span>All Buckets ({{ bucketCount }})</span>
     <span>
-      <button class="btn-dark">Create new Bucket</button>
+      <a
+        *ngIf="showCreateBucketBtn"
+        routerLink="new"
+        class="btn btn-dark"
+        >Create new Bucket</a>
     </span>
   </div>
 
