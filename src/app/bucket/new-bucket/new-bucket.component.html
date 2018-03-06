@@ -1,0 +1,27 @@
+<h3>Bucket list</h3>
+
+<div class="wrapper">
+  <p>Create New Bucket</p>
+
+  <form (ngSubmit)="form" #form="ngForm">
+    <div class="form-wrapper">
+      <div class="form-group">
+        <label for="bucket-name">Bucket Name*</label>
+        <input type="text" class="form-control" id="bucket-name">
+      </div>
+      <div class="form-group">
+        <label for="bucket-location">Bucket Location*</label>
+        <select name="bucket-location" id="bucket-location" class="form-control">
+          <option *ngFor="let location of locations" value="{{ location.name }}">
+            {{ location.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-dark">Create Bucket</button>
+  </form>
+
+</div>
+
+<app-all-buckets></app-all-buckets>

@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  width: 330px;
+}
+

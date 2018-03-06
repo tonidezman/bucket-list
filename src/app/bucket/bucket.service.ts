@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Bucket } from './bucket.model';
-import { HttpResponse } from 'selenium-webdriver/http';
+import { Location } from './location.model';
 
 @Injectable()
 export class BucketService {
   private host = 'https://challenge.3fs.si';
   private buckets: Bucket[] = [];
+  private locations: Location[] = [];
 
   constructor(private httpClient: HttpClient) {}
 
@@ -41,5 +42,12 @@ export class BucketService {
         }
       }
     ]);
+  }
+
+  getLocations(): Location[] {
+    return [
+      { id: 'some-id', name: 'Kranj' },
+      { id: 'some-id', name: 'Ljubljana' }
+    ];
   }
 }
