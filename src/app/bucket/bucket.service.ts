@@ -14,15 +14,21 @@ export class BucketService {
 
   getBuckets(): Bucket[] {
     // getBuckets() {
+
     //   this.httpClient
     //     .get(`${this.host}/storage/buckets`, {
     //       headers: {
-    //         Authorization: // get this token from localStorage
+    //         Authorization: `Token `
     //       }
     //     })
-    //     .subscribe((response: HttpResponse) => {
+    //     .subscribe(response => {
     //       console.log(response);
     //     });
+
+    //   return [];
+    localStorage.setItem('token', 'password123');
+    const token = localStorage.getItem('token');
+    console.log(token);
 
     return (this.buckets = [
       {

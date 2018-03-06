@@ -1,0 +1,16 @@
+.form-group {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group label {
+  width: 200px;
+  font-size: 1.5em;
+  line-height: 11px;
+}
+
+button {
+  margin-top: 10px;
+}
