@@ -1,3 +1,4 @@
+import { BucketObject } from './bucket-object.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -70,6 +71,8 @@ export class BucketService {
         this.changedLocation.next();
       });
   }
+
+  saveBucketObject(object: BucketObject) {}
 
   saveBucket(data: { 'bucket-name': string; 'bucket-location': string }) {
     const location = _.find(

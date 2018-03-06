@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BucketService } from './../bucket.service';
@@ -18,7 +18,8 @@ export class BucketDetailComponent implements OnInit {
 
   constructor(
     private bucketService: BucketService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private elem: ElementRef
   ) {}
 
   ngOnInit() {
@@ -37,5 +38,15 @@ export class BucketDetailComponent implements OnInit {
         this.objectsCount = this.objects.length;
       });
     });
+  }
+
+  openFileModal() {
+    const files = this.elem.nativeElement.querySelector('#uploadFile').click();
+    console.log('tonko');
+  }
+
+  submitFile() {
+    const files = this.elem.nativeElement.querySelector('#uploadFile').files;
+    console.log(files[0]);
   }
 }

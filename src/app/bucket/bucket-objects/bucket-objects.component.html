@@ -13,9 +13,15 @@
         <h5>All Files ({{ objectsCount }})</h5>
         <div class="buttons">
           <button class="btn btn-dark">Delete Object</button>
-          <button class="btn btn-dark">Upload Object</button>
-          <input type="file">
+          <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
         </div>
       </div>
+      <input
+        type="file"
+        class="btn btn-dark"
+        style="visibility:hidden;"
+        id="uploadFile"
+        (change)="submitFile()"
+        >
     </div>
 </div>
