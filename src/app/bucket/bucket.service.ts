@@ -21,6 +21,14 @@ export class BucketService {
     private authorizationService: AuthorizationService
   ) {}
 
+  getBucket(bucketId: string) {
+    this.httpClient.get(`${this.host}/storage/buckets/${bucketId}`, {
+      headers: {
+        Authorization: `Token ${this.authorizationService.getToken()}`
+      }
+    });
+  }
+
   getBuckets() {
     this.httpClient
       .get(`${this.host}/storage/buckets`, {
@@ -68,7 +76,6 @@ export class BucketService {
   }
 
   createBucket(bucket) {
-    // TODO remove this line when Server api is synchronized with Swagger documentation
     bucket.location = bucket.location.id;
 
     return this.httpClient

@@ -23,7 +23,12 @@ export class AllBucketsComponent implements OnInit {
 
     this.bucketService.changedBucket.subscribe(() => {
       this.buckets = this.bucketService.buckets;
+      this.bucketCount = this.buckets.length;
     });
     this.bucketService.getBuckets();
+  }
+
+  goToBucket(bucket: Bucket) {
+    this.router.navigate(['/buckets', bucket.id]);
   }
 }

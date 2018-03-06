@@ -19,10 +19,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let bucket of buckets">
-          <td>{{ bucket.name }}</td>
-          <td>{{ bucket.location.name }}</td>
-        </tr>
+        <tr
+          *ngFor="let bucket of buckets"
+          (click)="goToBucket(bucket)"
+          class="bucket-row">
+            <td>{{ bucket.name }}</td>
+            <td>{{ bucket.location.name }}</td>
+          </tr>
       </tbody>
     </table>
   </div>

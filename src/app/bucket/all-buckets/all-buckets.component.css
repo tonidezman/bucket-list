@@ -13,3 +13,7 @@
 .all-buckets-and-btn a {
   margin-top: -7px;
 }
+
+.bucket-row {
+  cursor: pointer;
+}

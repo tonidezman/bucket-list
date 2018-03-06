@@ -13,6 +13,7 @@ import { AllBucketsComponent } from './bucket/all-buckets/all-buckets.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NewBucketComponent } from './bucket/new-bucket/new-bucket.component';
 import { LoginComponent } from './bucket/login/login.component';
+import { BucketDetailComponent } from './bucket/bucket-detail/bucket-detail.component';
 
 const appRoutes: Routes = [
   {
@@ -30,6 +31,11 @@ const appRoutes: Routes = [
     canActivate: [AuthorizationService]
   },
   {
+    path: 'buckets/:id',
+    component: BucketDetailComponent,
+    canActivate: [AuthorizationService]
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
@@ -42,7 +48,8 @@ const appRoutes: Routes = [
     AllBucketsComponent,
     PageNotFoundComponent,
     NewBucketComponent,
-    LoginComponent
+    LoginComponent,
+    BucketDetailComponent
   ],
   imports: [
     RouterModule.forRoot(
