@@ -6,8 +6,8 @@ import { BucketService } from './../bucket.service';
 
 @Component({
   selector: 'app-bucket-detail',
-  templateUrl: './bucket-detail.component.html',
-  styleUrls: ['./bucket-detail.component.css']
+  templateUrl: './bucket-objects.component.html',
+  styleUrls: ['./bucket-objects.component.css']
 })
 export class BucketDetailComponent implements OnInit {
   bucketId: string;

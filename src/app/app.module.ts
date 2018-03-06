@@ -13,7 +13,7 @@ import { AllBucketsComponent } from './bucket/all-buckets/all-buckets.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NewBucketComponent } from './bucket/new-bucket/new-bucket.component';
 import { LoginComponent } from './bucket/login/login.component';
-import { BucketDetailComponent } from './bucket/bucket-detail/bucket-detail.component';
+import { BucketDetailComponent } from './bucket/bucket-objects/bucket-objects.component';
 
 const appRoutes: Routes = [
   {
