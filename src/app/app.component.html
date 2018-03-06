@@ -1,4 +1,10 @@
-<h3><a routerLink="/buckets">Secure Cloud storage</a></h3>
+<h3>
+  <a routerLink="/buckets">Secure Cloud storage</a>
+  <a
+    (click)="logout()"
+    class="logout"
+    >Logout</a>
+</h3>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

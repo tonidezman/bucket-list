@@ -1,7 +1,14 @@
 h3 {
   background-color: black;
   padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
 }
+
+.logout {
+  cursor: pointer;
+}
+
 .container {
   width: 800px;
   margin: 0 auto;

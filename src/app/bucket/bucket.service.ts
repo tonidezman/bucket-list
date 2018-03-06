@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Bucket } from './bucket.model';
 import { Location } from './location.model';
+import { AuthorizationService } from './../authorization.service';
 
 @Injectable()
 export class BucketService {
@@ -10,44 +11,42 @@ export class BucketService {
   private buckets: Bucket[] = [];
   private locations: Location[] = [];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authorizationService: AuthorizationService
+  ) {}
 
   getBuckets(): Bucket[] {
-    // getBuckets() {
-
-    //   this.httpClient
-    //     .get(`${this.host}/storage/buckets`, {
-    //       headers: {
-    //         Authorization: `Token `
-    //       }
-    //     })
-    //     .subscribe(response => {
-    //       console.log(response);
-    //     });
-
-    //   return [];
-    localStorage.setItem('token', 'password123');
-    const token = localStorage.getItem('token');
-    console.log(token);
-
-    return (this.buckets = [
-      {
-        id: 'my-awesome-bucket',
-        name: 'my-awesome-bucket',
-        location: {
-          id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
-          name: 'Kranj'
+    this.httpClient
+      .get(`${this.host}/storage/buckets`, {
+        headers: {
+          Authorization: `Token ${this.authorizationService.getToken()}`
         }
-      },
-      {
-        id: 'my-other-bucket',
-        name: 'my-other-bucket',
-        location: {
-          id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
-          name: 'Kranj'
-        }
-      }
-    ]);
+      })
+      .subscribe(response => {
+        console.log(response);
+      });
+
+    return [];
+
+    // return (this.buckets = [
+    //   {
+    //     id: 'my-awesome-bucket',
+    //     name: 'my-awesome-bucket',
+    //     location: {
+    //       id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
+    //       name: 'Kranj'
+    //     }
+    //   },
+    //   {
+    //     id: 'my-other-bucket',
+    //     name: 'my-other-bucket',
+    //     location: {
+    //       id: 'a0c51094-05d9-465f-8745-6cd9ee45b96d',
+    //       name: 'Kranj'
+    //     }
+    //   }
+    // ]);
   }
 
   getLocations(): Location[] {

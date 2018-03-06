@@ -13,4 +13,13 @@ export class AuthorizationService implements CanActivate {
     }
     return true;
   }
+
+  logout() {
+    localStorage.setItem('token', '');
+    this.router.navigate(['login']);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 }
