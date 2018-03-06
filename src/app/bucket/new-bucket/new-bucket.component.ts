@@ -14,4 +14,5 @@ export class NewBucketComponent implements OnInit {
 
   ngOnInit() {
     this.locations = this.bucketService.getLocations();
+  }
 }

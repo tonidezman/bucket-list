@@ -1,9 +1,13 @@
 h3 {
   background-color: black;
-  color: lightblue;
   padding: 10px 30px;
 }
 .container {
   width: 800px;
   margin: 0 auto;
+}
+
+h3 a, h3 a:hover {
+  color: lightblue;
+  text-decoration: none;
 }
