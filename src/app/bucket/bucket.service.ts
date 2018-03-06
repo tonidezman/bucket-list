@@ -1,13 +1,29 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Bucket } from './bucket.model';
+import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
 export class BucketService {
-  constructor() {}
+  private host = 'https://challenge.3fs.si';
+  private buckets: Bucket[] = [];
+
+  constructor(private httpClient: HttpClient) {}
 
   getBuckets(): Bucket[] {
-    return [
+    // getBuckets() {
+    //   this.httpClient
+    //     .get(`${this.host}/storage/buckets`, {
+    //       headers: {
+    //         Authorization: // get this token from localStorage
+    //       }
+    //     })
+    //     .subscribe((response: HttpResponse) => {
+    //       console.log(response);
+    //     });
+
+    return (this.buckets = [
       {
         id: 'my-awesome-bucket',
         name: 'my-awesome-bucket',
@@ -24,6 +40,6 @@ export class BucketService {
           name: 'Kranj'
         }
       }
-    ];
+    ]);
   }
 }
