@@ -31,7 +31,12 @@ const appRoutes: Routes = [
     canActivate: [AuthorizationService]
   },
   {
-    path: 'buckets/:id',
+    path: 'buckets/:id/objects',
+    component: BucketDetailComponent,
+    canActivate: [AuthorizationService]
+  },
+  {
+    path: 'buckets/:id/details',
     component: BucketDetailComponent,
     canActivate: [AuthorizationService]
   },

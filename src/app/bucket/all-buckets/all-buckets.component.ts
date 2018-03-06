@@ -29,6 +29,6 @@ export class AllBucketsComponent implements OnInit {
   }
 
   goToBucket(bucket: Bucket) {
-    this.router.navigate(['/buckets', bucket.id]);
+    this.router.navigate(['/buckets/', bucket.id, 'objects']);
   }
 }

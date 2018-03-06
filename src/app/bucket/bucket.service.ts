@@ -21,12 +21,23 @@ export class BucketService {
     private authorizationService: AuthorizationService
   ) {}
 
-  getBucket(bucketId: string) {
-    this.httpClient.get(`${this.host}/storage/buckets/${bucketId}`, {
+  getBucket(bucketId: string): Observable<Object> {
+    return this.httpClient.get(`${this.host}/storage/buckets/${bucketId}`, {
       headers: {
         Authorization: `Token ${this.authorizationService.getToken()}`
       }
     });
+  }
+
+  getObjects(bucketId: string): Observable<Object> {
+    return this.httpClient.get(
+      `${this.host}/storage/buckets/${bucketId}/objects`,
+      {
+        headers: {
+          Authorization: `Token ${this.authorizationService.getToken()}`
+        }
+      }
+    );
   }
 
   getBuckets() {

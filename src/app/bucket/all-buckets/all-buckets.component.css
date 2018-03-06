@@ -17,3 +17,6 @@
 .bucket-row {
   cursor: pointer;
 }
+.bucket-row:hover {
+  background-color: #F5F5F5;
+}

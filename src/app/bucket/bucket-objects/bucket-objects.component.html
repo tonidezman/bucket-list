@@ -1,3 +1,21 @@
-<p>
-  bucket-detail works!
-</p>
+<div class="wrapper">
+  <h1>{{ bucket.name }}</h1>
+  <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Files</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Details</a>
+      </li>
+    </ul>
+    <div class="tabs-body">
+      <div class="header">
+        <h5>All Files ({{ objectsCount }})</h5>
+        <div class="buttons">
+          <button class="btn btn-dark">Delete Object</button>
+          <button class="btn btn-dark">Upload Object</button>
+          <input type="file">
+        </div>
+      </div>
+    </div>
+</div>

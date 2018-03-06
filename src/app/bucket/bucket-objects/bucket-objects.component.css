@@ -1,0 +1,23 @@
+.wrapper {
+}
+
+h1 {
+  margin: 26px 0px;
+}
+
+.nav-item a, .nav-item a:hover {
+  color: #333;
+}
+
+.tabs-body {
+  background-color: white;
+  padding: 21px;
+  border-left: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
