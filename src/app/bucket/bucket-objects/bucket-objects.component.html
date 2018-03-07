@@ -3,7 +3,7 @@
   identifier="myModal">
       <h2>Delete Bucket Object</h2>
     <div *ngIf="selectedBucketObject; else pleaseSelectRow">
-      <p>Do you really want to delete this object?</p>
+      <p>Do you really want to delete <strong>{{ selectedBucketObject.name }}?</strong></p>
       <br>
       <button
         class="btn btn-dark"

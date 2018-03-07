@@ -87,6 +87,27 @@ export class BucketService {
       });
   }
 
+  deleteBucketObject(bucketId, bucketObjectId) {
+    return this.httpClient
+      .delete(
+        `${this.host}/storage/buckets/${bucketId}/objects/${bucketObjectId}`,
+        {
+          headers: {
+            Authorization: `Token ${this.authorizationService.getToken()}`
+          }
+        }
+      )
+      .subscribe(
+        response => {
+          this.getBucketObjects(bucketId);
+        },
+        error => {
+          console.log(JSON.stringify(error));
+          // TODO notify user if server responds with an error
+        }
+      );
+  }
+
   saveBucketObject(bucketId, formData) {
     return this.httpClient
       .post(`${this.host}/storage/buckets/${bucketId}/objects`, formData, {

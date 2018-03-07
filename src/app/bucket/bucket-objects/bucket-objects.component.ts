@@ -56,8 +56,12 @@ export class BucketDetailComponent implements OnInit {
   }
 
   deleteBucketObject(modalWindow) {
-    console.log('tonko balonko');
-    console.log(modalWindow.close());
+    modalWindow.close();
+
+    this.bucketService.deleteBucketObject(
+      this.bucket.id,
+      this.selectedBucketObject.name
+    );
   }
 
   openFileModal() {
