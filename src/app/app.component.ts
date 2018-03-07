@@ -12,4 +12,8 @@ export class AppComponent {
   logout() {
     this.authorizationService.logout();
   }
+
+  isLoggedIn() {
+    return localStorage.getItem('token').length === 36;
+  }
 }

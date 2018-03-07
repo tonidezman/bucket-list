@@ -1,6 +1,7 @@
 <h3>
   <a routerLink="/buckets">Secure Cloud storage</a>
   <a
+    *ngIf="isLoggedIn()"
     (click)="logout()"
     class="logout"
     >Logout</a>
