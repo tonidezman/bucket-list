@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import * as filesize from 'filesize';
 
 import { Bucket } from './bucket.model';
 import { Location } from './location.model';
@@ -12,9 +14,11 @@ import { AuthorizationService } from './../authorization.service';
 @Injectable()
 export class BucketService {
   public buckets: Bucket[] = [];
+  public bucketObjects: BucketObject[];
   public locations: Location[] = [];
   public changedLocation = new Subject();
   public changedBucket = new Subject();
+  public changedObjectsBucket = new Subject();
   private host = 'https://challenge.3fs.si';
 
   constructor(
@@ -30,15 +34,26 @@ export class BucketService {
     });
   }
 
-  getObjects(bucketId: string): Observable<Object> {
-    return this.httpClient.get(
-      `${this.host}/storage/buckets/${bucketId}/objects`,
-      {
+  getBucketObjects(bucketId: string) {
+    return this.httpClient
+      .get(`${this.host}/storage/buckets/${bucketId}/objects`, {
         headers: {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
-      }
-    );
+      })
+      .subscribe((response: any) => {
+        const bucketObjects: BucketObject[] = [];
+        response.objects.map(fileData => {
+          bucketObjects.push({
+            name: fileData.name,
+            size: filesize(fileData.size, { round: 0 }),
+            modified: moment(fileData.last_modified).format('DD.MM.YYYY')
+          });
+        });
+
+        this.bucketObjects = bucketObjects;
+        this.changedObjectsBucket.next();
+      });
   }
 
   getBuckets() {
@@ -81,8 +96,7 @@ export class BucketService {
       })
       .subscribe(
         response => {
-          console.log(JSON.stringify(response));
-          // this.changedBucket.next();
+          this.getBucketObjects(bucketId);
         },
         error => {
           console.log(JSON.stringify(error));
