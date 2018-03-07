@@ -67,9 +67,13 @@ export class BucketDetailComponent implements OnInit {
     return this.selectedBucketObject.name === bucketObject.name;
   }
 
+  deleteBucket(modalWindow) {
+    modalWindow.close();
+    this.bucketService.deleteBucket(this.bucket.id);
+  }
+
   deleteBucketObject(modalWindow) {
     modalWindow.close();
-
     this.bucketService.deleteBucketObject(
       this.bucket.id,
       this.selectedBucketObject.name

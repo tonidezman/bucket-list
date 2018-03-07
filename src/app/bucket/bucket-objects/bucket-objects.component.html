@@ -1,7 +1,7 @@
 <ngx-smart-modal
   #myModal
   identifier="myModal">
-      <h2>Delete Bucket Object</h2>
+    <h2>Delete Bucket Object</h2>
     <div *ngIf="selectedBucketObject; else pleaseSelectRow">
       <p>Do you really want to delete <strong>{{ selectedBucketObject.name }}?</strong></p>
       <br>
@@ -22,6 +22,22 @@
         (click)="myModal.close()"
         >Cancel</button>
     </ng-template>
+</ngx-smart-modal>
+
+<ngx-smart-modal
+  #deleteBucketModal
+  identifier="deleteBucketModal">
+    <h2>Delete whole Bucket</h2>
+    <p>Do you really want to delete <strong>{{ bucket.name }}?</strong></p>
+    <br>
+    <button
+      class="btn btn-dark"
+      (click)="deleteBucket(deleteBucketModal)"
+      >Delete</button>
+    <button
+      class="btn btn-dark"
+      (click)="deleteBucketModal.close()"
+      >Cancel</button>
 </ngx-smart-modal>
 
 
@@ -47,6 +63,7 @@
       <button
         *ngIf="isSelectedBucketDetailsTab"
         class="btn btn-dark delete-bucket-btn"
+        (click)="ngxSmartModalService.getModal('deleteBucketModal').open()"
         >Delete Bucket</button>
     </ul>
 
