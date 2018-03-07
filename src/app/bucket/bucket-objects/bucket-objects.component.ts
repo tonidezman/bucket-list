@@ -15,6 +15,7 @@ import { BucketObject } from './../bucket-object.model';
 export class BucketDetailComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
 
+  bucketName = '.';
   bucketId: string;
   bucket: Bucket = { id: '', name: '', location: { id: '', name: '' } };
   bucketStorageSize = '';
@@ -40,6 +41,7 @@ export class BucketDetailComponent implements OnInit {
         .getBucket(bucketId)
         .subscribe((response: { bucket: Bucket }) => {
           this.bucket = response.bucket;
+          this.bucketName = this.bucket.name;
         });
 
       this.bucketService.getBucketObjects(bucketId);
