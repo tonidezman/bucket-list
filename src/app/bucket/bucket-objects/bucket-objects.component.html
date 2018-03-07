@@ -12,7 +12,7 @@
       <div class="header">
         <h5>All Files ({{ bucketObjects.length }})</h5>
         <div class="buttons">
-          <button class="btn btn-dark">Delete Object</button>
+          <button class="btn btn-dark" (click)="deleteBucketObject">Delete Object</button>
           <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
         </div>
       </div>
@@ -27,8 +27,9 @@
         </thead>
         <tbody>
           <tr
+            (click)=selectRow(bucketObject)
             *ngFor="let bucketObject of bucketObjects"
-            class="bucket-row">
+            class="table-row" [ngClass]="{'selected-row': isSelected(bucketObject)}">
               <td>{{ bucketObject.name }}</td>
               <td>{{ bucketObject.modified }}</td>
               <td>{{ bucketObject.size }}</td>

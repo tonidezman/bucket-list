@@ -29,3 +29,7 @@ h1 {
 form {
   visibility: hidden;
 }
+
+.selected-row {
+  background-color: lightblue;
+}

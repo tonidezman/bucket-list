@@ -22,7 +22,7 @@
         <tr
           *ngFor="let bucket of buckets"
           (click)="goToBucket(bucket)"
-          class="bucket-row">
+          class="table-row">
             <td>{{ bucket.name }}</td>
             <td>{{ bucket.location.name }}</td>
           </tr>

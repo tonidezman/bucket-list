@@ -8,3 +8,10 @@ body {
   border-radius: 0;
   background-color: black;
 }
+
+.table-row {
+  cursor: pointer;
+}
+.table-row:hover {
+  background-color: #F5F5F5;
+}

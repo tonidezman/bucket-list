@@ -17,6 +17,7 @@ export class BucketDetailComponent implements OnInit {
   bucketId: string;
   bucket: Bucket = { id: '', name: '', location: { id: '', name: '' } };
   bucketObjects: BucketObject[] = [];
+  selectedBucketObject: BucketObject;
 
   constructor(
     private bucketService: BucketService,
@@ -40,6 +41,17 @@ export class BucketDetailComponent implements OnInit {
         this.bucketObjects = this.bucketService.bucketObjects;
       });
     });
+  }
+
+  selectRow(bucketObject: BucketObject) {
+    this.selectedBucketObject = bucketObject;
+  }
+
+  isSelected(bucketObject: BucketObject) {
+    if (!this.selectedBucketObject) {
+      return;
+    }
+    return this.selectedBucketObject.name === bucketObject.name;
   }
 
   openFileModal() {
