@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import * as moment from 'moment';
 import * as _ from 'lodash';
 
 import { Bucket } from './bucket.model';
@@ -72,7 +73,24 @@ export class BucketService {
       });
   }
 
-  saveBucketObject(object: BucketObject) {}
+  saveBucketObject(bucketId, formData) {
+    return this.httpClient
+      .post(`${this.host}/storage/buckets/${bucketId}/objects`, formData, {
+        headers: {
+          Authorization: `Token ${this.authorizationService.getToken()}`
+        }
+      })
+      .subscribe(
+        response => {
+          console.log(JSON.stringify(response));
+          // this.changedBucket.next();
+        },
+        error => {
+          console.log(JSON.stringify(error));
+          // TODO notify user if server responds with an error
+        }
+      );
+  }
 
   saveBucket(data: { 'bucket-name': string; 'bucket-location': string }) {
     const location = _.find(

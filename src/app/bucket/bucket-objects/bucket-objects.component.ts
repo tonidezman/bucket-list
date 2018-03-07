@@ -1,9 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { BucketService } from './../bucket.service';
 import { Bucket } from './../bucket.model';
-import { Object } from './../object.model';
+import { BucketObject } from './../bucket-object.model';
 
 @Component({
   selector: 'app-bucket-detail',
@@ -11,6 +12,8 @@ import { Object } from './../object.model';
   styleUrls: ['./bucket-objects.component.css']
 })
 export class BucketDetailComponent implements OnInit {
+  @ViewChild('fileInput') fileInput;
+
   bucketId: string;
   bucket: Bucket = { id: '', name: '', location: { id: '', name: '' } };
   objects: Object[] = [];
@@ -30,7 +33,6 @@ export class BucketDetailComponent implements OnInit {
         .getBucket(bucketId)
         .subscribe((response: { bucket: Bucket }) => {
           this.bucket = response.bucket;
-          console.log(this.bucket);
         });
 
       this.bucketService.getObjects(bucketId).subscribe((response: any) => {
@@ -41,12 +43,25 @@ export class BucketDetailComponent implements OnInit {
   }
 
   openFileModal() {
-    const files = this.elem.nativeElement.querySelector('#uploadFile').click();
-    console.log('tonko');
+    this.elem.nativeElement.querySelector('#uploadFile').click();
   }
 
-  submitFile() {
-    const files = this.elem.nativeElement.querySelector('#uploadFile').files;
-    console.log(files[0]);
+  fileChange(event) {
+    this.clickSubmit();
+  }
+
+  onSubmit() {
+    const files: FileList = this.fileInput.nativeElement.files;
+    if (files.length === 0) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', files[0], files[0].name);
+    this.bucketService.saveBucketObject(this.bucket.id, formData);
+  }
+
+  clickSubmit() {
+    this.elem.nativeElement.querySelector('#submit-button').click();
   }
 }

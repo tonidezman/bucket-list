@@ -1,3 +1,7 @@
-export class Object {
-  constructor(public name: string, modified: string, size: number) {}
+export class BucketObject {
+  constructor(
+    public name: string,
+    public modified: string,
+    public size: number
+  ) {}
 }
