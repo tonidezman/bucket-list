@@ -16,6 +16,26 @@
           <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
         </div>
       </div>
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Last modified</th>
+            <th scope="col">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let bucketObject of bucketObjects"
+            class="bucket-row">
+              <td>{{ bucketObject.name }}</td>
+              <td>{{ bucketObject.size }}</td>
+              <td>{{ bucketObject.modified }}</td>
+            </tr>
+        </tbody>
+      </table>
+
       <form (ngSubmit)="onSubmit()" #fileForm="ngForm">
         <input
           ngModel

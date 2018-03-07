@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 
 import { Bucket } from './bucket.model';
@@ -107,6 +106,7 @@ export class BucketService {
     this.createBucket(newBucket);
   }
 
+  // TODO maybe change something with saveBucket and than createBucket naming
   createBucket(bucket) {
     bucket.location = bucket.location.id;
 
