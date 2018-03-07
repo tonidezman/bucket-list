@@ -1,5 +1,3 @@
-.wrapper {
-}
 
 h1 {
   margin: 26px 0px;
@@ -32,4 +30,18 @@ form {
 
 .selected-row {
   background-color: lightblue;
+}
+
+.tabs-wrapper {
+  position: relative;
+}
+
+.delete-bucket-btn {
+  position: absolute;
+  right: 0;
+}
+
+.row {
+  margin: 7px;
+  font-size: 1.1em;
 }

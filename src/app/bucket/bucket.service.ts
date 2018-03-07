@@ -47,6 +47,7 @@ export class BucketService {
           bucketObjects.push({
             name: fileData.name,
             size: filesize(fileData.size, { round: 0 }),
+            sizeInBites: fileData.size,
             modified: moment(fileData.last_modified).format('DD.MM.YYYY')
           });
         });

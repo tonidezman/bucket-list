@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import * as filesize from 'filesize';
 
 import { BucketService } from './../bucket.service';
 import { Bucket } from './../bucket.model';
@@ -16,6 +17,8 @@ export class BucketDetailComponent implements OnInit {
 
   bucketId: string;
   bucket: Bucket = { id: '', name: '', location: { id: '', name: '' } };
+  bucketStorageSize = '';
+  isSelectedBucketDetailsTab: boolean;
   bucketObjects: BucketObject[] = [];
   selectedBucketObject: BucketObject;
 
@@ -23,12 +26,15 @@ export class BucketDetailComponent implements OnInit {
     public ngxSmartModalService: NgxSmartModalService,
     private bucketService: BucketService,
     private route: ActivatedRoute,
-    private elem: ElementRef
+    private elem: ElementRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const bucketId = params['id'];
+      this.isSelectedBucketDetailsTab =
+        this.router.url.split('/')[3] === 'details';
 
       this.bucketService
         .getBucket(bucketId)
@@ -37,9 +43,15 @@ export class BucketDetailComponent implements OnInit {
         });
 
       this.bucketService.getBucketObjects(bucketId);
-
       this.bucketService.changedObjectsBucket.subscribe(() => {
         this.bucketObjects = this.bucketService.bucketObjects;
+        const sumBitSize = this.bucketObjects.reduce(
+          (acc, currObj: BucketObject) => {
+            return (acc += currObj.sizeInBites);
+          },
+          0
+        );
+        this.bucketStorageSize = filesize(sumBitSize, { round: 0 });
       });
     });
   }

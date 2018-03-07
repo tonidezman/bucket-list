@@ -2,6 +2,7 @@ export class BucketObject {
   constructor(
     public name: string,
     public modified: string,
-    public size: number
+    public size: string,
+    public sizeInBites: number
   ) {}
 }

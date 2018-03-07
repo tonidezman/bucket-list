@@ -27,54 +27,86 @@
 
 <div class="wrapper">
   <h1>{{ bucket.name }}</h1>
-  <ul class="nav nav-tabs">
+  <div class="tabs-wrapper">
+    <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Files</a>
+        <a
+          [routerLink]="['/', 'buckets', bucket.id, 'objects']"
+          [ngClass]="{active: !isSelectedBucketDetailsTab}"
+          class="nav-link"
+          >Files</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Details</a>
+      <li
+        class="nav-item">
+        <a
+          [routerLink]="['/', 'buckets', bucket.id, 'details']"
+          [ngClass]="{active: isSelectedBucketDetailsTab}"
+          class="nav-link"
+          >Details</a>
       </li>
+      <button
+        *ngIf="isSelectedBucketDetailsTab"
+        class="btn btn-dark delete-bucket-btn"
+        >Delete Bucket</button>
     </ul>
-    <div class="tabs-body">
-      <div class="header">
-        <h5>All Files ({{ bucketObjects.length }})</h5>
-        <div class="buttons">
-          <button class="btn btn-dark" (click)="ngxSmartModalService.getModal('myModal').open()">Delete Object</button>
-          <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
+
+  </div>
+    <div class="files-body" *ngIf="!isSelectedBucketDetailsTab">
+      <div class="tabs-body">
+        <div class="header">
+          <h5>All Files ({{ bucketObjects.length }})</h5>
+          <div class="buttons">
+            <button class="btn btn-dark" (click)="ngxSmartModalService.getModal('myModal').open()">Delete Object</button>
+            <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Last modified</th>
+              <th scope="col">Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              (click)=selectRow(bucketObject)
+              *ngFor="let bucketObject of bucketObjects"
+              class="table-row" [ngClass]="{'selected-row': isSelected(bucketObject)}">
+                <td>{{ bucketObject.name }}</td>
+                <td>{{ bucketObject.modified }}</td>
+                <td>{{ bucketObject.size }}</td>
+              </tr>
+          </tbody>
+        </table>
+        <form (ngSubmit)="onSubmit()" #fileForm="ngForm">
+          <input
+            ngModel
+            name="file"
+            type="file"
+            class="btn btn-dark"
+            id="uploadFile"
+            #fileInput
+            (change)="fileChange($event)">
+            <input type="submit" id="submit-button">
+        </form>
+      </div>
+    </div>
+
+    <div class="details-body" *ngIf="isSelectedBucketDetailsTab">
+      <div class="tabs-body">
+        <div class="row">
+          <div class="col-sm-3">Bucket Name: </div>
+          <div class="col-sm-8">{{ bucket?.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">Location: </div>
+          <div class="col-sm-8">{{ bucket?.location?.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">Storage Size: </div>
+          <div class="col-sm-8">{{ bucketStorageSize }}</div>
         </div>
       </div>
-
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Last modified</th>
-            <th scope="col">Size</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            (click)=selectRow(bucketObject)
-            *ngFor="let bucketObject of bucketObjects"
-            class="table-row" [ngClass]="{'selected-row': isSelected(bucketObject)}">
-              <td>{{ bucketObject.name }}</td>
-              <td>{{ bucketObject.modified }}</td>
-              <td>{{ bucketObject.size }}</td>
-            </tr>
-        </tbody>
-      </table>
-
-      <form (ngSubmit)="onSubmit()" #fileForm="ngForm">
-        <input
-          ngModel
-          name="file"
-          type="file"
-          class="btn btn-dark"
-          id="uploadFile"
-          #fileInput
-          (change)="fileChange($event)"
-          >
-          <input type="submit" id="submit-button">
-      </form>
     </div>
 </div>
