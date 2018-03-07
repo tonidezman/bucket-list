@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpParams, HttpHeaders } from '@angular/common/http';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 import { BucketService } from './../bucket.service';
 import { Bucket } from './../bucket.model';
@@ -20,6 +20,7 @@ export class BucketDetailComponent implements OnInit {
   selectedBucketObject: BucketObject;
 
   constructor(
+    public ngxSmartModalService: NgxSmartModalService,
     private bucketService: BucketService,
     private route: ActivatedRoute,
     private elem: ElementRef
@@ -52,6 +53,11 @@ export class BucketDetailComponent implements OnInit {
       return;
     }
     return this.selectedBucketObject.name === bucketObject.name;
+  }
+
+  deleteBucketObject(modalWindow) {
+    console.log('tonko balonko');
+    console.log(modalWindow.close());
   }
 
   openFileModal() {

@@ -13,10 +13,3 @@
 .all-buckets-and-btn a {
   margin-top: -7px;
 }
-
-.bucket-row {
-  cursor: pointer;
-}
-.bucket-row:hover {
-  background-color: #F5F5F5;
-}

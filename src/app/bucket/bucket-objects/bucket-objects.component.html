@@ -1,3 +1,30 @@
+<ngx-smart-modal
+  #myModal
+  identifier="myModal">
+      <h2>Delete Bucket Object</h2>
+    <div *ngIf="selectedBucketObject; else pleaseSelectRow">
+      <p>Do you really want to delete this object?</p>
+      <br>
+      <button
+        class="btn btn-dark"
+        (click)="deleteBucketObject(myModal)"
+        >Delete</button>
+      <button
+        class="btn btn-dark"
+        (click)="myModal.close()"
+        >Cancel</button>
+    </div>
+    <ng-template #pleaseSelectRow>
+      <p>Please select Bucket Object to delete</p>
+      <br>
+      <button
+        class="btn btn-dark"
+        (click)="myModal.close()"
+        >Cancel</button>
+    </ng-template>
+</ngx-smart-modal>
+
+
 <div class="wrapper">
   <h1>{{ bucket.name }}</h1>
   <ul class="nav nav-tabs">
@@ -12,7 +39,7 @@
       <div class="header">
         <h5>All Files ({{ bucketObjects.length }})</h5>
         <div class="buttons">
-          <button class="btn btn-dark" (click)="deleteBucketObject">Delete Object</button>
+          <button class="btn btn-dark" (click)="ngxSmartModalService.getModal('myModal').open()">Delete Object</button>
           <button class="btn btn-dark" (click)="openFileModal()">Upload Object</button>
         </div>
       </div>

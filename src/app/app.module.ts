@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 import { AuthorizationService } from './authorization.service';
 import { BucketService } from './bucket/bucket.service';
@@ -57,16 +59,18 @@ const appRoutes: Routes = [
     BucketDetailComponent
   ],
   imports: [
+    BrowserModule,
     RouterModule.forRoot(
       appRoutes
       // { enableTracing: true } // <-- debugging purposes only
     ),
-    BrowserModule,
+    NgxSmartModalModule.forRoot(),
     HttpModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [BucketService, AuthorizationService],
+  providers: [BucketService, AuthorizationService, NgxSmartModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
