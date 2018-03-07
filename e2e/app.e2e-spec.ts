@@ -1,3 +1,4 @@
+import { browser } from 'protractor';
 import { AppPage } from './app.po';
 
 describe('bucket-list App', () => {
@@ -9,6 +10,7 @@ describe('bucket-list App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    const navigationText = 'Secure Cloud storage';
+    expect(page.getLogoText()).toEqual(navigationText);
   });
 });
