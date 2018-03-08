@@ -43,6 +43,11 @@ const appRoutes: Routes = [
     canActivate: [AuthorizationService]
   },
   {
+    path: '',
+    redirectTo: 'buckets',
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
