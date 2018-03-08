@@ -91,7 +91,6 @@ export class BucketService {
   }
 
   deleteBucket(bucketId) {
-    console.log(bucketId);
     return this.httpClient
       .delete(`${this.host}/storage/buckets/${bucketId}`, {
         headers: {
