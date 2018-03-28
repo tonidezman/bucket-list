@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import * as filesize from 'filesize';
+import 'rxjs/add/operator/retry';
 
 import { Bucket } from './bucket.model';
 import { Location } from './location.model';
@@ -43,6 +44,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe((response: any) => {
         const bucketObjects: BucketObject[] = [];
         response.objects.map(fileData => {
@@ -66,6 +68,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe(
         (response: { buckets: Bucket[] }) => {
           this.buckets = response.buckets;
@@ -84,6 +87,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe((response: { locations: Location[] }) => {
         this.locations = response.locations;
         this.changedLocation.next();
@@ -97,6 +101,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe(
         response => {
           this.router.navigate(['/buckets']);
@@ -118,6 +123,7 @@ export class BucketService {
           }
         }
       )
+      .retry(5)
       .subscribe(
         response => {
           this.getBucketObjects(bucketId);
@@ -136,6 +142,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe(
         response => {
           this.getBucketObjects(bucketId);
@@ -172,6 +179,7 @@ export class BucketService {
           Authorization: `Token ${this.authorizationService.getToken()}`
         }
       })
+      .retry(5)
       .subscribe(
         response => {
           this.getBuckets();

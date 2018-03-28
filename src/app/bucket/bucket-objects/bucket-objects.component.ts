@@ -39,6 +39,7 @@ export class BucketDetailComponent implements OnInit {
 
       this.bucketService
         .getBucket(bucketId)
+        .retry(5)
         .subscribe((response: { bucket: Bucket }) => {
           this.bucket = response.bucket;
           this.bucketName = this.bucket.name;
