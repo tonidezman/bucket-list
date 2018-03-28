@@ -14,6 +14,11 @@ export class AppComponent {
   }
 
   isLoggedIn() {
-    return localStorage.getItem('token').length === 36;
+    const tokenLength = 36;
+    const token = localStorage.getItem('token');
+    if (token) {
+      return token.length === tokenLength;
+    }
+    return false;
   }
 }
