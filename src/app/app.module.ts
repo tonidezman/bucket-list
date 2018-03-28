@@ -45,7 +45,8 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'buckets',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthorizationService]
   },
   {
     path: '**',

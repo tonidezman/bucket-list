@@ -8,11 +8,11 @@ export class AuthorizationService implements CanActivate {
   canActivate(): boolean {
     const tokenLength = 36;
     const token = localStorage.getItem('token');
-    if (token && token.length !== tokenLength) {
-      this.router.navigate(['login']);
-      return false;
+    if (token && token.length === tokenLength) {
+      return true;
     }
-    return true;
+    this.router.navigate(['login']);
+    return false;
   }
 
   logout() {
