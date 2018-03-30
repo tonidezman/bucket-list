@@ -8,34 +8,27 @@ describe('bucket-list App', () => {
     page = new AppPage();
   });
 
-  it('displays Logo text', () => {
+  it('user cannot login without valid token', () => {
     page.navigateTo();
     const navigationText = 'Secure Cloud storage';
     expect(page.getLogoText()).toContain(navigationText);
-  });
 
-  it('does not automatically login user without token', () => {
-    page.navigateTo();
-    browser.getCurrentUrl().then(function(url) {
-      browser.get(url + 'login');
-    });
-    browser.waitForAngular();
-    expect(page.getBodyText()).not.toContain('Logout');
+    const invalidToken = 'invalidToken';
+    page.getTokenInputField().sendKeys(invalidToken);
     page.getLoginButton().click();
     expect(page.getBodyText()).not.toContain('Logout');
   });
 
-  xit('log in user', () => {
+  it('user can login with valid token', () => {
     page.navigateTo();
-    browser.getCurrentUrl().then(function(url) {
-      browser.get(url + 'login');
-    });
     browser.waitForAngular();
     expect(page.getBodyText()).not.toContain('Logout');
+
     const secretToken = '************************************';
-    browser.waitForAngular();
     page.getTokenInputField().sendKeys(secretToken);
     page.getLoginButton().click();
+    browser.waitForAngular();
+
     expect(page.getBodyText()).toContain('Logout');
   });
 });
