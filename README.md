@@ -2,8 +2,7 @@
 
 ## Run the app locally
 - clone the repo
-- `$ npm install`
-- `$ npm serve `
+- `npm install`
 - `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Running unit tests
