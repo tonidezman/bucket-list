@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthorizationService } from './authorization.service';
 import { Router } from '@angular/router';
 
-fdescribe('AuthorizationService', () => {
+describe('AuthorizationService', () => {
   let service: AuthorizationService;
   let router: Router;
   beforeEach(() => {
@@ -31,7 +31,7 @@ fdescribe('AuthorizationService', () => {
   });
 
   it('returns true if token is valid', () => {
-    const validToken = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    const validToken = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // 36 characters
     localStorage.setItem('token', validToken);
     expect(service.canActivate()).toBe(true);
   });
