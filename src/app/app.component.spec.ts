@@ -23,7 +23,7 @@ describe('AppComponent', () => {
     })
   );
   // TODO remove "f" in front of it when tests are fixed
-  fit(
+  it(
     'should render title in a h1 tag',
     async(() => {
       // const fixture = TestBed.createComponent(AppComponent);
