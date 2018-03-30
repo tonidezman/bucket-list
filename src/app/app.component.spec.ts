@@ -1,37 +1,33 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { AuthorizationService } from './authorization.service';
 
 describe('AppComponent', () => {
-  // beforeEach(
-  //   async(() => {
-  //     TestBed.configureTestingModule({
-  //       declarations: [AppComponent],
-  //       providers: [],
-  //       imports: [RouterTestingModule, AuthorizationService]
-  //     }).compileComponents();
-  //   })
-  // );
-  it(
-    'should create the app',
-    async(() => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.debugElement.componentInstance;
-      expect(app).toBeTruthy();
-    })
-  );
-  // TODO remove "f" in front of it when tests are fixed
-  it(
-    'should render title in a h1 tag',
-    async(() => {
-      // const fixture = TestBed.createComponent(AppComponent);
-      // fixture.detectChanges();
-      // const compiled = fixture.debugElement.nativeElement;
-      // expect(compiled.querySelector('h3').textContent).toContain(
-      //   'Welcome to app!'
-      // );
-    })
-  );
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let bannerHeading: HTMLElement;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      imports: [RouterTestingModule.withRoutes([])],
+      providers: [AuthorizationService]
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    bannerHeading = fixture.nativeElement.querySelector('h3 a');
+  });
+
+  it('should create the app', () => {
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it('should render title in a h1 tag', () => {
+    fixture.detectChanges();
+    expect(bannerHeading.textContent).toContain('Secure Cloud storage');
+  });
 });
